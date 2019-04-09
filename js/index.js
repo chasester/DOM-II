@@ -215,6 +215,8 @@ class Paddle
     {
         this.pos.x += mousedx*time*this.maxSpeed;
         mousedx = 0;
+        if(this.pos.x - (this.length/2) >= canvas.width) this.pos.x = 0-this.length/2+1;
+        if(this.pos.x + (this.length/2) <=  0) this.pos.x = canvas.width + this.length/2 -1;
     }
     ishit(pos, radius)
     {
@@ -256,7 +258,7 @@ window.setInterval(function()//physics frame
 
 function updatePosition(e) 
 {
-    mousedx += e.movementX;
+    mousedx +=  Math.min(Math.max(e.movementX, -100), 100); 
 }
 
 for(let c =0; c < 20; c++)
